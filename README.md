@@ -1,12 +1,12 @@
 # Neural Network Enhanced Version
 
-A high-performance C++ neural network implementation featuring both CPU and GPU training, real-time visualization, and interactive digit recognition. This project is specifically optimized for the MNIST handwritten digit dataset.
+A high-performance C++ neural network implementation featuring multi-threaded training, real-time visualization, and interactive digit recognition. This project is specifically optimized for the MNIST handwritten digit dataset.
+
+![Neural Network Preview](preview.png)
 
 ## Features
 
-- **Dual Backend Support**:
-    - **CPU**: Multi-threaded training using a custom-built ThreadPool for efficient parallelization across all available cores.
-    - **GPU**: High-speed training powered by **OpenGL Compute Shaders**, allowing for massive batch processing and significant performance gains.
+- **Multi-threaded CPU Training**: Efficient parallelization across all available cores using a custom-built ThreadPool.
 - **Real-time Visualization**: Dynamic visualization of the network architecture, including neuron activations and connection weights, using the **Raylib** graphics library.
 - **Interactive Drawing Mode**: Draw digits directly onto a canvas and watch the neural network predict them in real-time.
 - **Data Augmentation**: Built-in support for image distortion and augmentation to improve model robustness and accuracy.
@@ -16,8 +16,8 @@ A high-performance C++ neural network implementation featuring both CPU and GPU 
 
 ## Project Structure
 
-- `src/`: Main source files for CPU, GPU, and Drawing modes.
-- `include/`: Core headers including `NeuralNetwork.hpp` and `NeuralNetworkGPU.hpp`.
+- `src/`: Main source files for training and drawing modes.
+- `include/`: Core headers including `NeuralNetwork.hpp`.
 - `resources/`: Contains the MNIST dataset, fonts, and saved model weights.
 - `lib/`: Pre-compiled Raylib static libraries for Windows.
 
@@ -26,24 +26,18 @@ A high-performance C++ neural network implementation featuring both CPU and GPU 
 ### Prerequisites
 
 - A C++ compiler (G++ recommended).
-- OpenGL 4.3+ capable GPU (for the GPU version).
 - Bash environment (for running the build scripts).
 
 ### Building and Running
 
-The project includes several build scripts for different modes:
+The project includes build scripts for different modes:
 
-1. **Standard CPU Version (Training + Visualization)**:
+1. **Standard Version (Training + Visualization)**:
    ```bash
    ./build_run.sh
    ```
 
-2. **GPU Accelerated Version (Headless Training)**:
-   ```bash
-   ./build_run_gpu.sh
-   ```
-
-3. **Interactive Drawing Mode**:
+2. **Interactive Drawing Mode**:
    ```bash
    ./build_run_draw.sh
    ```
@@ -51,12 +45,7 @@ The project includes several build scripts for different modes:
 ## Technical Details
 
 ### CPU Implementation
-The CPU engine uses a **ThreadPool** pattern to distribute the workload of forward and backward passes during batch training. It implements **Backpropagation** with **Xavier initialization** to ensure stable gradients from the start.
-
-### GPU Implementation
-The GPU engine utilizes **OpenGL Compute Shaders** (GLSL) to offload heavy matrix operations. 
-- **SSBOs (Shader Storage Buffer Objects)** are used to store neurons, weights, biases, and deltas.
-- **Compute Shaders** handle the forward pass, backward pass, and weight updates in parallel across thousands of GPU threads.
+The engine uses a **ThreadPool** pattern to distribute the workload of forward and backward passes during batch training. It implements **Backpropagation** with **Xavier initialization** to ensure stable gradients from the start.
 
 ### Visualization
 Powered by **Raylib**, the visualization provides:
@@ -72,4 +61,4 @@ The project uses the **MNIST dataset**, which must be placed in the `resources/`
 - `t10k-labels-idx1-ubyte`
 
 ## License
-This project is open-source. Feel free to use and modify it for your own learning or projects!
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
