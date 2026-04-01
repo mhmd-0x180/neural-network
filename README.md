@@ -2,8 +2,8 @@
 
 A high-performance C++ neural network implementation featuring multi-threaded training, real-time visualization, and interactive digit recognition. This project is specifically optimized for the MNIST handwritten digit dataset.
 
-![Neural Network Preview](preview.png)
-
+![Neural Network Preview](preview1.png)
+![Neural Network Preview](preview2.png)
 ## Features
 
 - **Multi-threaded CPU Training**: Efficient parallelization across all available cores using a custom-built ThreadPool.
